@@ -1,0 +1,49 @@
+{
+    "Libros": [
+        {
+            "titulo": "Las Enseñanzas de Don Juan",
+            "autor":"Carlos Castañeda",
+            "stock":"5"
+        },
+        {
+            "titulo": "1984",
+            "autor":"George Orwell",
+            "stock":"3"
+        },
+        {
+            "titulo": "Un mundo feliz",
+            "autor":"Aldous Huxley",
+            "stock":"5"
+        },
+        {
+            "titulo": "Rebelión en la Granja",
+            "autor":"George Orwell",
+            "stock":"4"
+        },
+        {
+            "titulo": "El hombre duplicado",
+            "autor":"José Saramago",
+            "stock":"1"
+        },
+        {
+            "titulo": "Ensayo sobre la ceguera",
+            "autor":"José Saramago",
+            "stock":"1"
+        },
+        {
+            "titulo": "El señor de los anillos: La comunidad del anillo",
+            "autor":"J.R.R. Tolkien",
+            "stock":"2"
+        },
+        {
+            "titulo": "El señor de los anillos: Las dos torres",
+            "autor":"J.R.R. Tolkien",
+            "stock":"3"
+        },
+        {
+            "titulo": "El señor de los anillos: El retorno del rey",
+            "autor":"J.R.R. Tolkien",
+            "stock":"7"
+        }
+    ]
+}
