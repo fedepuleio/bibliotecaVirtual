@@ -5,7 +5,6 @@ class Usuario {
         this.email = email;
         this.telefono = telefono;
         this.bibliotecaUsuario = [];
-        this.mensajes = [];
     }
 }
 
@@ -15,7 +14,6 @@ class Libro {
         this.titulo = titulo;
         this.autor = autor;
         //this.stock = parseInt(stock);
-        this.queUsuariosLoTienen = [];
     }
 }
 
@@ -105,7 +103,7 @@ const mostrarLibrosUsuario = (idUsuario) => {
                         <img src="./images/libro.jpg" class= "foto-chica">
                         <h5 class="badge bg-light text-dark card-title"> ${libro.titulo} </h5>
                         <p class="card-text badge bg-warning">Autor: ${libro.autor}</p>
-                        <button class="btn btn-outline-dark flexCenter separado centro libro${libro.id} " onclick=solicitarLibro();>Solicitar este libro</button>
+                        <button class="btn btn-outline-dark flexCenter separado centro" onclick="solicitarLibro(${libro.id},${idUsuario})";>Solicitar este libro</button>
                     </div>
                 </div>
         `);
@@ -251,18 +249,26 @@ $('#confirmar').on('click', function () {
     console.log(quienSolicitaLibro);
     const usuario = arrayUsuarios.find(usuario => usuario.id == quienSolicitaLibro);
     alert("Muy bien " + usuario.nombre + "! acabas de solicitar este libro");
+    confirmarSolicitud(usuario.id);
 });
 
-function solicitarLibro(libro) {
-    console.log(libro);
+function solicitarLibro(idLibro,idPropietario) {
+    $("#idPropietario").val(idPropietario);
+    $("#idLibro").val(idLibro);
     $(".section-solicitarLibro").removeClass("oculto");
     crearSelect($("#opcionesUsuarios"), arrayUsuarios);
-
 }
 
-function confirmarSolicitud (idPropietario, libro,idDestinatario) {
-
-}
+function confirmarSolicitud (idDestinatario) {
+    let propietario = arrayUsuarios.find(usuario => usuario.id == $("#idPropietario").val());
+    let libro = propietario.bibliotecaUsuario.find(libro => libro.id == $("#idLibro").val());
+    let destinatario = arrayUsuarios.find(usuario => usuario.id == idDestinatario);
+    destinatario.bibliotecaUsuario.push(libro);
+    propietario.bibliotecaUsuario.splice(propietario.bibliotecaUsuario.findIndex(b => b.id == libro.id), 1 );
+    guardarLocalStorage(propietario.id, propietario.bibliotecaUsuario);
+    console.log(destinatario.bibliotecaUsuario);
+    guardarLocalStorage(destinatario.id,destinatario.bibliotecaUsuario);
+    }
 
 
 
