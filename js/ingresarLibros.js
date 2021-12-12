@@ -248,7 +248,6 @@ $('#cancelar').on('click', function () {
 $('#confirmar').on('click', function () {
     console.log(quienSolicitaLibro);
     const usuario = arrayUsuarios.find(usuario => usuario.id == quienSolicitaLibro);
-    alert("Muy bien " + usuario.nombre + "! acabas de solicitar este libro");
     confirmarSolicitud(usuario.id);
 });
 
@@ -268,6 +267,7 @@ function confirmarSolicitud (idDestinatario) {
     guardarLocalStorage(propietario.id, propietario.bibliotecaUsuario);
     console.log(destinatario.bibliotecaUsuario);
     guardarLocalStorage(destinatario.id,destinatario.bibliotecaUsuario);
+    mostrarLibrosUsuario(destinatario.id);
     }
 
 
