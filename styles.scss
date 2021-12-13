@@ -6,41 +6,49 @@
     list-style-type: none;
 }
 
-// etiquetas globales 
+// etiquetas globales
 html {
-    font-size: 62,5%;
+    font-size: 62, 5%;
 }
+
 body {
     font-size: 1.2rem;
     position: relative;
 }
-main,section {
+
+main,
+section {
     margin: 2rem;
 }
+
 li {
     margin: 0.5rem;
     padding: 0.5rem;
 }
 
-
 input {
     margin-top: 1rem;
-
 }
 
 header {
-    width: 100vw;
+    min-width: 100vw;
+}
+.container-fluid {
+    padding: 0;
 }
 
-h1,h5 { 
+h1,
+h5 {
     text-align: center;
     margin: 0.2rem 0.2rem;
     margin-bottom: 0;
 }
+
 p {
     margin: 0.2rem 0.2rem;
     margin-bottom: 0;
 }
+
 // id
 
 #contenedorCards {
@@ -56,16 +64,18 @@ p {
     flex-wrap: wrap;
 }
 
-// clases 
+// clases
 
 .column {
     flex-direction: column;
 }
+
 .flexCentro {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .wrap {
     flex-wrap: wrap;
 }
@@ -77,10 +87,12 @@ p {
     margin-top: 5rem;
     height: 50%;
 }
+
 .card {
     min-height: 15rem;
     margin: 2rem;
 }
+
 .flexStart {
     display: flex;
     justify-content: flex-start;
@@ -89,7 +101,7 @@ p {
 .barra-busqueda {
     margin-top: 2rem;
     margin: 0 auto;
-    width : 80vw;
+    width: 80vw;
 }
 
 .contenedor {
@@ -100,8 +112,16 @@ p {
     height: 50%;
     flex-wrap: wrap;
 }
+.contenedor1 {
+    margin: 0 auto;
+    width: 75vw;
+    justify-content: space-between;
+    height: 50%;
+    flex-wrap: wrap;
+}
 
-.inputLibro, .inputUsuario {
+.inputLibro,
+.inputUsuario {
     max-width: 60%;
 }
 
@@ -119,8 +139,6 @@ p {
     flex-direction: column;
     align-items: center;
 }
-
-
 
 .oculto {
     display: none;
@@ -145,33 +163,37 @@ p {
 .card-title {
     font-size: 1rem;
     width: 100%;
-
 }
+
 .badge {
     display: block;
-    white-space:normal;
+    white-space: normal;
 }
 
 .centro {
     margin: 1.2rem auto;
 }
 
-.section-solicitarLibro {
-    width: 60vw;
+.section-solicitarLibro,
+#ingresarLibro,
+#ingresarUsuario {
+    display: none;
+    /*     width: 60vw;
     height: 40vh;
     margin: 0 auto;
     background-color: rgba(0, 0, 0, 0.603);
     position: absolute;
     bottom: 50vh;
-    left: 40vh;
-
+    left: 40vh; */
 }
+
 .solicitarLibro {
     width: 80%;
     height: 80%;
     background-color: rgba(255, 255, 255, 0.911);
     margin: 0 auto;
 }
+
 .foto-chica {
     align-self: center;
     width: 50%;

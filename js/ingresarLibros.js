@@ -13,7 +13,6 @@ class Libro {
         this.id = idLibro;
         this.titulo = titulo;
         this.autor = autor;
-        //this.stock = parseInt(stock);
     }
 }
 
@@ -26,7 +25,7 @@ let idUsuario = 0;
 let idLibro = 0;
 
 
-// Comprueba que el usuario o mail que se quiere ingresar no existan previamente antes de crearlo.
+// Se crea un usuario nuevo y se muestra en una card
 const agregarUsuario = () => {
     let nombreUser = $('#nombre').val();
     let emailUser = $('#email').val();
@@ -43,6 +42,7 @@ const agregarUsuario = () => {
             let usuario = new Usuario(idUsuario, nombreUser, emailUser, telefonoUser);
             ++idUsuario;
             arrayUsuarios.push(usuario);
+            console.log(`Usuario ${usuario.nombre} creado exitosamente.`);
             guardarLocalStorage('arrayUsuarios', arrayUsuarios);
             crearSelect($("#quienSubeLibro"), arrayUsuarios);
             mostrarUsuarios(arrayUsuarios);
@@ -53,67 +53,27 @@ const agregarUsuario = () => {
 }
 
 
-// Comprueba que el libro que se quiere agregar no exista, si es asi; lo crea, sino; actualiza el stock del mismo;
+// Se crea un libro con las caracteristicas ingresadas, y se guarda en la biblioteca del usuario seleccionado y en la general
 const agregarLibro = () => {
     let tituloLibroNuevo = $('#titulo').val();
     let autorLibroNuevo = $('#autor').val();
-    let cantidadLibroNuevo = parseInt($('#cantidad').val());
-    if ((tituloLibroNuevo == '') || (autorLibroNuevo == '') || (cantidadLibroNuevo == '')) {
+    //let cantidadLibroNuevo = parseInt($('#cantidad').val());
+    if ((tituloLibroNuevo == '') || (autorLibroNuevo == '')) {
         alert("Ingrese los datos correctamente");
     } else {
-            let libro = new Libro(idLibro, tituloLibroNuevo, autorLibroNuevo, cantidadLibroNuevo);
-            ++idLibro;
-            bibliotecaGeneral.push(libro);
-            console.log('Se agrego el libro ' + libro.titulo + ' correctamente, agregado por: ', arrayUsuarios[usuarioElegido].nombre);
-            guardarLibro(usuarioElegido, libro);
-            actualizarLocalStorage();
-            mostrarLibros(bibliotecaGeneral);
-            $('.inputLibro').val("");
-            return libro;
-    }
-}
-
-
-const mostrarBiblioteca = () => {
-    if (bibliotecaGeneral.length <= 0) {
-
-    } else {
-        $("#bibliotecaGeneral").removeClass("oculto").addClass("contenedorCards");;
+        let libro = new Libro(idLibro, tituloLibroNuevo, autorLibroNuevo);
+        ++idLibro;
+        bibliotecaGeneral.push(libro);
+        console.log(`Se agrego el libro ${libro.titulo} correctamente, agregado por: ${arrayUsuarios[usuarioElegido].nombre}`);
+        guardarLibro(usuarioElegido, libro);
+        actualizarLocalStorage();
         mostrarLibros(bibliotecaGeneral);
+        $('.inputLibro').val("");
+        return libro;
     }
 }
 
-
-// se muestran solo los libros del usuario seleccionado 
-const mostrarLibrosUsuario = (idUsuario) => {
-    var mostrarLibrosDe = arrayUsuarios.find(usuario => usuario.id == idUsuario);
-    var bibliotecaUsuario = mostrarLibrosDe.bibliotecaUsuario;
-    $("#bibliotecaGeneral").removeClass("oculto").addClass("contenedorCards");
-    $("#bibliotecaGeneral").empty();
-    for (const libro of bibliotecaUsuario) {
-        let titulo = libro.titulo;
-        /* let librosDuplicados = biblioteca.filter(function (currentElement) {
-            // the current value is an object, so you can check on its properties
-            return currentElement.titulo === libro.titulo && currentElement.autor  === libro.autor;
-        }); */
-        $("#bibliotecaGeneral").append(
-            `
-                <div class="card libro${libro.titulo}" style="width: 18rem;">
-                    <div class="card-body tarjeta">
-                        <img src="./images/libro.jpg" class= "foto-chica">
-                        <h5 class="badge bg-light text-dark card-title"> ${libro.titulo} </h5>
-                        <p class="card-text badge bg-warning">Autor: ${libro.autor}</p>
-                        <button class="btn btn-outline-dark flexCenter separado centro" onclick="solicitarLibro(${libro.id},${idUsuario})";>Solicitar este libro</button>
-                    </div>
-                </div>
-        `);
-        }
-}
-
-
-
-
-// muestra en el html una card con los datos de cada usuario existente 
+// Mostrar los usuarios existentes en cards
 function mostrarUsuarios(arrayUsuarios) {
     $("#arrayUsuarios").removeClass("oculto").addClass("contenedorCards");;
     $("#arrayUsuarios").empty();
@@ -136,12 +96,8 @@ function mostrarUsuarios(arrayUsuarios) {
     }
 }
 
-//encontrar los libros duplicados dentro de una biblioteca.
-// darle un valor al stock por cada libro encontrado
 
-
-
-// Muestra en el html una card con los datos de cada libro existente 
+// Mostrar libros de biblioteca reutilizable 
 function mostrarLibros(biblioteca) {
     $("#bibliotecaGeneral").removeClass("oculto").addClass("contenedorCards");
     $("#bibliotecaGeneral").empty();
@@ -160,27 +116,43 @@ function mostrarLibros(biblioteca) {
                     </div>
                 </div>
         `);
-        }
     }
+}
 
-
-
-
-$('#opcionesUsuarios').change(function () {
-    etiqueta = document.getElementById('opcionesUsuarios');
-    quienSolicitaLibro = this.options[etiqueta.selectedIndex].value;
-    console.log('Se seleccionó el usuario con id ' + quienSolicitaLibro);
-    return quienSolicitaLibro;
-});
-
-var select = document.getElementById('quienSubeLibro');
-select.addEventListener('change', seleccionarUsuario);
-
+// Mostrar la Biblioteca General
+const mostrarBiblioteca = () => {
+    if (bibliotecaGeneral.length <= 0) {
+    } else {
+        $("#bibliotecaGeneral").removeClass("oculto").addClass("contenedorCards");;
+        mostrarLibros(bibliotecaGeneral);
+    }
+}
+// Se muestran solo los libros del usuario seleccionado 
+const mostrarLibrosUsuario = (idUsuario) => {
+    var mostrarLibrosDe = arrayUsuarios.find(usuario => usuario.id == idUsuario);
+    var bibliotecaUsuario = mostrarLibrosDe.bibliotecaUsuario;
+    $("#bibliotecaGeneral").removeClass("oculto").addClass("contenedorCards");
+    $("#bibliotecaGeneral").empty();
+    for (const libro of bibliotecaUsuario) {
+        let titulo = libro.titulo;
+        $("#bibliotecaGeneral").append(
+            `
+                <div class="card libro${libro.titulo}" style="width: 18rem;">
+                    <div class="card-body tarjeta">
+                        <img src="./images/libro.jpg" class= "foto-chica">
+                        <h5 class="badge bg-light text-dark card-title"> ${libro.titulo} </h5>
+                        <p class="card-text badge bg-warning">Autor: ${libro.autor}</p>
+                        <button class="btn btn-outline-dark flexCenter separado centro" onclick="solicitarLibro(${libro.id},${idUsuario})";>Solicitar este libro</button>
+                    </div>
+                </div>
+        `);
+    }
+}
 
 // Permite almacenar el dato del usuario que se está seleccionando: 
 function seleccionarUsuario() {
     usuarioElegido = this.options[select.selectedIndex].value;
-    console.log('Se seleccionó el usuario con id ' + usuarioElegido);
+    console.log(`El usuario con id ${usuarioElegido}, va a agregar un libro`);
     return usuarioElegido;
 }
 
@@ -201,93 +173,103 @@ const crearSelect = (etiqueta, array) => {
 let botonBuscar = document.getElementById("btnBuscar");
 botonBuscar.onclick = filtrarLibros;
 
-// filtra los resultados en la busqueda de los libros de biblioteca general
+// Filtrar los resultados de busqueda
 function filtrarLibros() {
     let productosFiltrados = bibliotecaGeneral;
     let palabraClave = document.getElementById("busqueda");
     productosFiltrados = bibliotecaGeneral.filter(elemento => elemento.titulo.includes(palabraClave.value));
-    //limpiarHTML(); // falta crear limpiarHTML;
     mostrarLibros(productosFiltrados);
 }
 
 
 // Guardado
 
-// Guarda el libro en bibioteca privada del usuario y en el local storage
+// Guardar el libro en bibioteca privada del usuario y en el local storage
 function guardarLibro(selectedUser, libro) {
     const usuario = arrayUsuarios.find(usuario => usuario.id == selectedUser);
-    console.log(usuario);
+    console.log(`El usuario ${usuario.nombre} acaba de guardar el libro ${libro.titulo} en su biblioteca privada`);
     usuario.bibliotecaUsuario.push(libro);
     guardarLocalStorage(usuario.id, usuario.bibliotecaUsuario);
 }
 
-// Guarda en local
+// Guardar en localstorage reutilizable
 function guardarLocalStorage(clave, valor) {
     localStorage.setItem(clave, JSON.stringify(valor));
 }
 
-// Actualiza bibloteca general y array usuarios
+// Actualizar bibloteca general y array usuarios
 function actualizarLocalStorage() {
     guardarLocalStorage('bibliotecaGeneral', bibliotecaGeneral);
     guardarLocalStorage('arrayUsuarios', arrayUsuarios);
 }
 
 
+// Intercambio 
 
-$('#mostrarBibliotecaGral').on('click', mostrarBiblioteca);
-
-$('#agregarUsuario').on('click', agregarUsuario);
-
-$('#agregarLibro').on('click', agregarLibro);
-
-$('#cancelar').on('click', function () {
-    $(".section-solicitarLibro").addClass("oculto");
-});
-
-
-$('#confirmar').on('click', function () {
-    console.log(quienSolicitaLibro);
-    const usuario = arrayUsuarios.find(usuario => usuario.id == quienSolicitaLibro);
-    confirmarSolicitud(usuario.id);
-});
-
-function solicitarLibro(idLibro,idPropietario) {
+// Se despliega un menu para elegir quien va a recibir el libro solicitado
+function solicitarLibro(idLibro, idPropietario) {
     $("#idPropietario").val(idPropietario);
     $("#idLibro").val(idLibro);
-    $(".section-solicitarLibro").removeClass("oculto");
+    $(".section-solicitarLibro").toggle(2000);
     crearSelect($("#opcionesUsuarios"), arrayUsuarios);
 }
 
-function confirmarSolicitud (idDestinatario) {
+// boton listo que se despliega cuando damos click en "solicitar Libro"
+function confirmarSolicitud(idDestinatario) {
     let propietario = arrayUsuarios.find(usuario => usuario.id == $("#idPropietario").val());
     let libro = propietario.bibliotecaUsuario.find(libro => libro.id == $("#idLibro").val());
     let destinatario = arrayUsuarios.find(usuario => usuario.id == idDestinatario);
     destinatario.bibliotecaUsuario.push(libro);
-    propietario.bibliotecaUsuario.splice(propietario.bibliotecaUsuario.findIndex(b => b.id == libro.id), 1 );
+    propietario.bibliotecaUsuario.splice(propietario.bibliotecaUsuario.findIndex(b => b.id == libro.id), 1);
     guardarLocalStorage(propietario.id, propietario.bibliotecaUsuario);
-    console.log(destinatario.bibliotecaUsuario);
-    guardarLocalStorage(destinatario.id,destinatario.bibliotecaUsuario);
+    console.log(`Se actualizó la biblioteca de ${destinatario.nombre}`);
+    guardarLocalStorage(destinatario.id, destinatario.bibliotecaUsuario);
     mostrarLibrosUsuario(destinatario.id);
-    }
+}
 
 
 
-
-/* $('#inicioUsuario').click(() => {
+$('#inicioUsuario').click(() => {
     $("#ingresarUsuario").toggle(2000);
 });
 
 $('#inicioLibro').click(() => {
     $("#ingresarLibro").toggle(2000);
-}); */
+});
 
+$('#agregarUsuario').on('click', agregarUsuario);
 
+$('#agregarLibro').on('click', agregarLibro);
 
+// Retorna el id del destinatario del intercambio 
+$('#opcionesUsuarios').change(function () {
+    etiqueta = document.getElementById('opcionesUsuarios');
+    quienSolicitaLibro = this.options[etiqueta.selectedIndex].value;
+    console.log(`El usuario con id ${quienSolicitaLibro}, quiere solicitar un libro`);
+    return quienSolicitaLibro;
+});
+
+var select = document.getElementById('quienSubeLibro');
+select.addEventListener('change', seleccionarUsuario);
+
+$('#mostrarBibliotecaGral').on('click', mostrarBiblioteca);
+
+$('#confirmar').on('click', function () {
+    console.log(`El usuario con id ${quienSolicitaLibro} solicita un libro`);
+    const usuario = arrayUsuarios.find(usuario => usuario.id == quienSolicitaLibro);
+    confirmarSolicitud(usuario.id);
+});
+
+$('#cancelar').on('click', function () {
+    $(".section-solicitarLibro").addClass("oculto");
+});
+
+// Mostrar libros para archivo json con libros precargados
 $("#inicioLibros").click(() => {
+    $("#ejemploLibros").removeClass("oculto").addClass("contenedorCards flexCentro");
     $.get("./js/libros.json", (data) => {
         let libros = data.Libros;
         for (let i = 0; i < libros.length; i++) {
-
             $("#ejemploLibros").append(
                 `
                 <div class="card libro${libros[i].titulo}" style="width: 18rem;">
@@ -295,15 +277,36 @@ $("#inicioLibros").click(() => {
                         <img src="./images/libro.jpg" class= "foto-chica">
                         <h5 class="badge bg-light text-dark card-title"> ${libros[i].titulo} </h5>
                         <p class="card-text badge bg-warning">Autor: ${libros[i].autor}</p>
-                        <p class="card-text badge bg-info">Stock:3 unidad/es.</p>
-                        <button id=solicitar${libros[i]}" onclick=solicitarLibro(); class="btn btn-outline-dark flexCenter separado centro">Solicitar este libro</button>
+                        <button id=solicitar${libros[i]}" ; class="btn btn-outline-dark flexCenter separado centro">Solicitar este libro</button>
                     </div>
                 </div>
         `)
         }
     });
 });
+ //onclick="solicitarLibroPrecargado(${libros[i].id})"
 
+
+
+ /* // misma funcion con solicitarLibro, pero para los libros pre cargados
+function solicitarLibroPrecargado(idLibro) {
+    $("#idLibro").val(idLibro);
+    $(".section-solicitarLibro").toggle(2000);
+    crearSelect($("#opcionesUsuarios"),arrayUsuarios);
+} */
+
+
+/* function confirmarSolicitudPrecargado(idDestinatario) {
+    let libro = propietario.bibliotecaUsuario.find(libro => libro.id == $("#idLibro").val());
+    let destinatario = arrayUsuarios.find(usuario => usuario.id == idDestinatario);
+    let quienLoTiene = arrayUsuarios.find(usuario => usuario.bibliotecaUsuario.find(libroUsuario => libroUsuario.id == libro));
+    if(quienLoTiene){
+        alert("Este libro ya lo tiene " + quienLoTiene + " , pediselo!");
+    } else {
+        destinatario.bibliotecaUsuario.push(libro);
+        guardarLocalStorage(propietario.id, propietario.bibliotecaUsuario);
+    }
+} */
 
 
 // LOG IN PARA QUE CUANDO ENTRO ME CARGUE LOS DATOS, MENSAJES Y PETICIONES QUE TENGA
@@ -321,77 +324,10 @@ $("#inicioLibros").click(() => {
 
 
 
+// Proximos avances
 
-
-// las cards de cada usuario tiene un select para intercambiar libros, y seleccionas a quien se lo envias para hacer el cambio
-// despues agregar la opcion de quitar de tu biblioteca
-
-// agregar un buscador de usuarios para cuando te llega la solicitud de intercambio
-
-
-// no te permite solicitar un libro si tu biblioteca privada esta vacia
-
-
-// agregue en libro this.quienlotiene y this.mensajes en usuario 
-// falta agregar que cuando toco el boton solicitar intercambio, se le envia un mensaje a cada usuario que posea ese libro ;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*         const ejemploLibros = [];
-
-        ejemploLibros.push(new Libro(100, "Las Enseñanzas de Don Juan", "Carlos Castañeda", 25)); ejemploLibros.push(new Libro(101, "1984", "George Orwell", 10)); ejemploLibros.push(new Libro(102, "Un mundo feliz", "Aldous Huxley", 5)); ejemploLibros.push(new Libro(103, "Rebelión en la Granja", "George Orwell", 12)); ejemploLibros.push(new Libro(104, "El hombre duplicado", "José Saramago", 3)); ejemploLibros.push(new Libro(105, "Ensayo sobre la ceguera", "José Saramago", 4)); ejemploLibros.push(new Libro(106, "El señor de los anillos: La comunidad del anillo", "J.R.R. Tolkien", 22)); ejemploLibros.push(new Libro(107, "El señor de los anillos: Las dos torres", "J.R.R. Tolkien", 17)); ejemploLibros.push(new Libro(108, "El señor de los anillos: El retorno del rey", "J.R.R. Tolkien", 16));
-
-
-
-        mostrarEjemploLibros(ejemploLibros);
-
-        function mostrarEjemploLibros(libros) {
-            for (const libro of libros) {
-                $("#ejemploLibros").append(
-                    `
-                <div class="card libro${libro.titulo}" style="width: 18rem;">
-                    <div class="card-body tarjeta">
-                        <h5 class="badge bg-light text-dark card-title"> ${libro.titulo} </h5>
-                        <p class="card-text badge bg-warning">Autor: ${libro.autor}</p>
-                        <p class="card-text badge bg-info">Stock: ${libro.stock} unidad/es.</p>
-                        <button id="solicitar" class="btn btn-outline-dark flexCenter separado centro">Solicitar este libro</button>
-                    </div>
-                </div>
-        `)
-            }
-        } */
+// Select en card de bibliotecaUsuario para seleccionar a quien se lo envias para hacer el cambio
+// Opcion de quitar de tu biblioteca
+// Buscador de usuarios, bandeja de entrada para ver solicitudes
+// No te permite solicitar un libro si tu biblioteca privada esta vacia
+// Mensaje de solicitud de intercambio;

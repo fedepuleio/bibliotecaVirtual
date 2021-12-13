@@ -8,7 +8,7 @@
 }
 
 html {
-  font-size: 62,5%;
+  font-size: 62, 5%;
 }
 
 body {
@@ -16,7 +16,8 @@ body {
   position: relative;
 }
 
-main, section {
+main,
+section {
   margin: 2rem;
 }
 
@@ -30,10 +31,15 @@ input {
 }
 
 header {
-  width: 100vw;
+  min-width: 100vw;
 }
 
-h1, h5 {
+.container-fluid {
+  padding: 0;
+}
+
+h1,
+h5 {
   text-align: center;
   margin: 0.2rem 0.2rem;
   margin-bottom: 0;
@@ -136,7 +142,19 @@ p {
       flex-wrap: wrap;
 }
 
-.inputLibro, .inputUsuario {
+.contenedor1 {
+  margin: 0 auto;
+  width: 75vw;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 50%;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.inputLibro,
+.inputUsuario {
   max-width: 60%;
 }
 
@@ -209,14 +227,17 @@ p {
   margin: 1.2rem auto;
 }
 
-.section-solicitarLibro {
-  width: 60vw;
-  height: 40vh;
-  margin: 0 auto;
-  background-color: rgba(0, 0, 0, 0.603);
-  position: absolute;
-  bottom: 50vh;
-  left: 40vh;
+.section-solicitarLibro,
+#ingresarLibro,
+#ingresarUsuario {
+  display: none;
+  /*     width: 60vw;
+    height: 40vh;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.603);
+    position: absolute;
+    bottom: 50vh;
+    left: 40vh; */
 }
 
 .solicitarLibro {
