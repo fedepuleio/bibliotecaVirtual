@@ -12,7 +12,7 @@ html {
 }
 
 body {
-    font-size: 1.2rem;
+    font-size: 1.0rem;
     position: relative;
 }
 
@@ -48,10 +48,9 @@ header {
 }
 h1,
 h5 {
+
     text-align: center;
-    margin: 0.3rem 0.3rem;
-    margin-bottom: 0.3rem;
-    margin-bottom: 0;
+    margin: 1rem 0.3rem 1rem;
 }
 
 p {
@@ -98,7 +97,7 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 5rem;
+
     height: 50%;
 }
 .baseline {
@@ -125,9 +124,9 @@ p {
 
 .contenedor {
     margin: 0 auto;
-    width: 75vw;
+    width: 60%;
     justify-content: space-between;
-    margin-top: 5rem;
+    margin-top: 2rem;
     height: 50%;
     flex-wrap: wrap;
 }
@@ -138,11 +137,11 @@ p {
     height: 50%;
     flex-wrap: wrap;
 }
-
-.inputLibro,
-.inputUsuario {
-    max-width: 60%;
+.div-titulo-autor-libro {
+    margin-top: 0.5rem;
+    align-items: center;
 }
+
 
 .flexCenter {
     display: flex;
@@ -157,6 +156,12 @@ p {
 }
 .formulario {
     margin: 0 auto;
+}
+.formulario1 {
+    margin-top: 1rem;
+}
+.datosUsuario {
+    width: 100%;
 }
 
 .oculto {
@@ -176,7 +181,7 @@ p {
 }
 
 .separado {
-    margin: 0.5rem 0.5rem;
+    margin: 1rem 0.5rem;
 }
 
 .card-title {
@@ -211,19 +216,54 @@ p {
     width: 50%;
     height: 50%;
 }
+.inputLibro {
+        margin: 0.2rem 0.2rem;
+        padding: 0.3rem;
+        width: 60%;
+    }
+.inputUsuario {
+        margin: 0.2rem auto;
+        width: 80%;
+    }
+.me-2 {
+    margin: 0 auto;
+}
+.select-usuario {
+    margin: 1rem;
+}
+#agregarLibro {
+    margin: 0 auto;
+}
+.select-libro {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
 
+}
 
+    @media screen and (min-width: 1000px) {
+        .contenedor {
+            width: 40%;
+            height: 20rem;
+        }
+        .div-formularios {
+            display: flex;
+            flex-direction: row;
+        }
+    }
 @media screen and (max-width: 767px) {
-    div {
-        display: flex;
+    .div-formularios {
+        flex-direction: column;
     }
-    .inputUsuario, .inputLibro {
-        margin: 0;
-        margin-left: 0.5rem;
-        padding: 0;
-        width: 100%;
+    .contenedor {
+        margin: 1rem auto;
+        width: 80%;
     }
-    div > label {
-        width: 30%;
+    .select-libro{
+        flex-direction: column;
+        width: 90%;
+    }
+    p{
+        padding: 0.3rem;
     }
 }

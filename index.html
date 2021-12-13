@@ -33,50 +33,62 @@
                 <input id="busqueda" class="form-control me-2 " type="search" placeholder="Buscar..."
                     aria-label="Search">
                 <button id="btnBuscar" class="btn btn-outline-success baseline buscar" type="button"><img
-                        src="./images/search-svgrepo-com.svg" alt="logo" width="30" height="24"
-                        ></button>
+                        src="./images/search-svgrepo-com.svg" alt="logo" width="30" height="24"></button>
             </form>
         </main>
-        <!-- formulario usuarios -->
-        <section class="contenedor column borde flexCenter " id="formularioUsuario">
-            <h1>Creá tu usuario: </h1>
-            <fieldset>
-                <form action="" class="flex column align-centro centrado formulario">
+        <div class="div-formularios">
+            <!-- formulario usuarios -->
+            <section class="contenedor column borde" id="formularioUsuario">
+                <h1>Creá tu usuario: </h1>
+                <fieldset>
+                    <form action="" class="flex column align-centro centrado formulario formulario1">
+                        <div class="datosUsuario flex column align-centro">
+                            <input id="nombre" class="inputUsuario form-control" type="text"
+                                placeholder=" Usuario...">
+
+
+                            <input id="email" class="inputUsuario form-control" type="text"
+                                placeholder=" Email...">
+
+                            <input id="telefono" class="inputUsuario form-control" type="text"
+                                placeholder=" Teléfono...">
+                        </div>
+                        <input id="crearUsuario" class="btn btn-warning separado" type="button" value=" Crear Usuario">
+                    </form>
+                </fieldset>
+            </section>
+
+            <!-- formulario libros -->
+            
+            <section class="contenedor column borde align-centro  " id="formularioLibro">
+                <h1>Ingresar Libro: </h1>
+                <fieldset>
                     
-                    
-                    <input id="nombre" class="inputUsuario form-control me-2" type="text" placeholder=" Usuario...">
-                    
-                    
-                    <input id="email" class="inputUsuario form-control me-2" type="text" placeholder=" Email...">
-                
-                    <input id="telefono" class="inputUsuario form-control me-2" type="text" placeholder=" Teléfono...">
-                    <input id="crearUsuario" class="btn btn-warning separado" type="button" value=" Crear Usuario">
-                </form>
-            </fieldset>
-        </section>
-        <!-- formulario libros -->
-        <section class="contenedor column borde flexCenter align-centro  " id="formularioLibro">
-            <h1>Ingresar un nuevo Libro: </h1>
-            <fieldset>
-                <form action="" class="flex column align-centro formulario centrado">
-                    <div>
-                    <label for="titulo">Titulo: </label>
-                    <input id="titulo" class="inputLibro form-control me-2 " type="text" placeholder=" Harry Potter">
-                    </div>
-                    <div>
-                    <label for="autor">Autor: </label>
-                    <input id="autor" class="inputLibro form-control me-2" type="text" placeholder=" J.K.Rowling">
-                    </div>
-                    <div>
-                        De quien es el libro? 
-                        <select id="quienSubeLibro">
-                            <option value="" disabled selected>Seleccionar...</option>
-                        </select>
-                    </div>
-                    <input id="agregarLibro" class="btn btn-warning separado" type="button" value="Agregar Libro">
-                </form>
-            </fieldset>
-        </section>
+                    <form action="" class="flex column align-centro centrado formulario formulario1">
+                        <div class="div-titulo-autor-libro flexCenter">
+                            <label for="titulo">Titulo: </label>
+                            <input id="titulo" class="inputLibro form-control" type="text"
+                                placeholder="Harry Potter">
+                        </div>
+                        <div class="div-titulo-autor-libro flexCenter">
+                            <label for="autor">Autor: </label>
+                            <input id="autor" class="inputLibro form-control" type="text"
+                                placeholder="J.K.Rowling">
+                        </div>
+                        <div class="quienSubeLibro flex column ">
+                            <div class="select-libro">
+                            <p>De quien es el libro?</p> 
+                            <select id="quienSubeLibro" >
+                                <option value="" disabled selected>Seleccionar...</option>
+                            </select>
+                            </div>  
+                            
+                        </div>
+                        <input id="agregarLibro" class="btn btn-warning" type="button" value="Agregar Libro">
+                    </form>
+                </fieldset>
+            </section>
+        </div>
         <!-- botones para desplegar los formularios -->
         <section class="flexCentro wrap">
             <button id="verFormularioUsuario" class="btn btn-dark separado">Crear Usuario</button>
