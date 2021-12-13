@@ -21,71 +21,68 @@
         <header>
             <!-- barra de navegacion -->
             <nav class="navbar navbar-dark bg-dark">
-                <div class="container-fluid ">
+                <div class=" display-flex flex-start container-fluid ">
                     <a class="navbar-brand"><img src="./images/libro.jpg" alt="logo" width="30" height="24"
-                            class="d-inline-block align-text-top">Biblioteca virtual</a>
+                            class="d-inline-block align-text-top"> Biblioteca Virtual</a>
                 </div>
             </nav>
         </header>
         <main>
             <!-- barra de busqueda -->
             <form class="d-flex barra-busqueda centrado">
-                <input id="busqueda" class="form-control me-2" type="search" placeholder="Buscar..."
+                <input id="busqueda" class="form-control me-2 " type="search" placeholder="Buscar..."
                     aria-label="Search">
-                <button id="btnBuscar" class="btn btn-outline-success" type="button"><img
+                <button id="btnBuscar" class="btn btn-outline-success baseline buscar" type="button"><img
                         src="./images/search-svgrepo-com.svg" alt="logo" width="30" height="24"
-                        class="d-inline-block align-text-top">Buscar</button>
+                        ></button>
             </form>
         </main>
         <!-- formulario usuarios -->
-        <section class="contenedor column borde flexCenter " id="ingresarUsuario">
-            <h1>Ingresá tus datos </h1>
+        <section class="contenedor column borde flexCenter " id="formularioUsuario">
+            <h1>Creá tu usuario: </h1>
             <fieldset>
-                <form action="" class="datos">
-                    <label for="nombre">Usuario: </label>
-                    <input id="nombre" class="inputUsuario form-control me-2" type="text"
-                        placeholder="Ingrese su nombre...">
-
-                    <label for="email">E-mail: </label>
-                    <input id="email" class="inputUsuario form-control me-2" type="text"
-                        placeholder="ejemplo@gmail.com">
-
-                    <label for="telefono">Telefono: </label>
-                    <input id="telefono" class="inputUsuario form-control me-2" type="text" placeholder="1167778477">
-
-                    <input id="agregarUsuario" class="btn btn-warning separado" type="button" value="Agregar Usuario">
+                <form action="" class="flex column align-centro centrado formulario">
+                    
+                    
+                    <input id="nombre" class="inputUsuario form-control me-2" type="text" placeholder=" Usuario...">
+                    
+                    
+                    <input id="email" class="inputUsuario form-control me-2" type="text" placeholder=" Email...">
+                
+                    <input id="telefono" class="inputUsuario form-control me-2" type="text" placeholder=" Teléfono...">
+                    <input id="crearUsuario" class="btn btn-warning separado" type="button" value=" Crear Usuario">
                 </form>
             </fieldset>
         </section>
         <!-- formulario libros -->
-        <section class="contenedor column borde flexCenter " id="ingresarLibro">
-            <h1>Ingresá tus Libros</h1>
+        <section class="contenedor column borde flexCenter align-centro  " id="formularioLibro">
+            <h1>Ingresar un nuevo Libro: </h1>
             <fieldset>
-                <form action="" class="datos">
+                <form action="" class="flex column align-centro formulario centrado">
+                    <div>
                     <label for="titulo">Titulo: </label>
-                    <input id="titulo" class="inputLibro form-control me-2 " type="text"
-                        placeholder="El Hombre Duplicado">
-
+                    <input id="titulo" class="inputLibro form-control me-2 " type="text" placeholder=" Harry Potter">
+                    </div>
+                    <div>
                     <label for="autor">Autor: </label>
-                    <input id="autor" class="inputLibro form-control me-2" type="text" placeholder="José Saramago">
-
-                    <!-- <label for="cantidad">Cantidad: </label>
-                    <input id="cantidad" class="inputLibro form-control me-2" type="number"> -->
-
-                    <label for="quienSubeElLibro">De quién es el libro?</label>
-                    <select id="quienSubeLibro">
-                        <option value="" disabled selected>Seleccione un usuario...</option>
-                    </select>
+                    <input id="autor" class="inputLibro form-control me-2" type="text" placeholder=" J.K.Rowling">
+                    </div>
+                    <div>
+                        De quien es el libro? 
+                        <select id="quienSubeLibro">
+                            <option value="" disabled selected>Seleccionar...</option>
+                        </select>
+                    </div>
                     <input id="agregarLibro" class="btn btn-warning separado" type="button" value="Agregar Libro">
                 </form>
             </fieldset>
         </section>
         <!-- botones para desplegar los formularios -->
         <section class="flexCentro wrap">
-            <button id="inicioUsuario" class="btn btn-dark separado">Agregar Usuario</button>
-            <button id="inicioLibro" class="btn btn-dark separado">Agregar Libro</button>
-            <button id="inicioLibros" class="btn btn-dark separado">Ver libros precargados</button>
-            <button id="mostrarBibliotecaGral" class="btn btn-dark separado ">Mostrar todos los libros</button>
+            <button id="verFormularioUsuario" class="btn btn-dark separado">Crear Usuario</button>
+            <button id="verFormulariolibro" class="btn btn-dark separado">Ingresar Libro</button>
+            <button id="verLibrosPrecargados" class="btn btn-dark separado">Ver Libros recargados</button>
+            <button id="mostrarBibliotecaGral" class="btn btn-dark separado ">Mostrar toda la Biblioteca</button>
         </section>
 
 
@@ -97,11 +94,11 @@
             <form action="" class="solicitarLibro flexCentro">
                 <label for="solicitarLibro">Agregar a la biblioteca de:</label>
                 <select id="opcionesUsuarios">
-                    <option value="" disabled selected>Seleccione un usuario...</option>
+                    <option value="" disabled selected>Seleccionar...</option>
                 </select>
                 <input id="idPropietario" type="hidden" value="">
                 <input id="idLibro" type="hidden" value="">
-                <input id="confirmar" class="btn btn-warning separado" type="button" value="Listo">
+                <input id="aceptar" class="btn btn-warning separado" type="button" value="Aceptar">
                 <input id="cancelar" class="btn btn-warning separado" type="button" value="Cancelar">
             </form>
         </section>
@@ -119,7 +116,7 @@
         <!-- Scripts -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <script src="./js/ingresarLibros.js"></script>
+        <script src="./js/main.js"></script>
 
 
         <!-- Fin scripts -->

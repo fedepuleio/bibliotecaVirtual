@@ -26,7 +26,7 @@ let idLibro = 0;
 
 
 // Se crea un usuario nuevo y se muestra en una card
-const agregarUsuario = () => {
+const crearUsuario = () => {
     let nombreUser = $('#nombre').val();
     let emailUser = $('#email').val();
     let telefonoUser = $('#telefono').val();
@@ -171,10 +171,10 @@ const crearSelect = (etiqueta, array) => {
 
 // Buscador 
 let botonBuscar = document.getElementById("btnBuscar");
-botonBuscar.onclick = filtrarLibros;
+botonBuscar.onclick = filtrar;
 
 // Filtrar los resultados de busqueda
-function filtrarLibros() {
+function filtrar() {
     let productosFiltrados = bibliotecaGeneral;
     let palabraClave = document.getElementById("busqueda");
     productosFiltrados = bibliotecaGeneral.filter(elemento => elemento.titulo.includes(palabraClave.value));
@@ -215,7 +215,7 @@ function solicitarLibro(idLibro, idPropietario) {
 }
 
 // boton listo que se despliega cuando damos click en "solicitar Libro"
-function confirmarSolicitud(idDestinatario) {
+function intercambiarLibro(idDestinatario) {
     let propietario = arrayUsuarios.find(usuario => usuario.id == $("#idPropietario").val());
     let libro = propietario.bibliotecaUsuario.find(libro => libro.id == $("#idLibro").val());
     let destinatario = arrayUsuarios.find(usuario => usuario.id == idDestinatario);
@@ -229,15 +229,15 @@ function confirmarSolicitud(idDestinatario) {
 
 
 
-$('#inicioUsuario').click(() => {
-    $("#ingresarUsuario").toggle(2000);
+$('#verFormularioUsuario').click(() => {
+    $("#formularioUsuario").toggle(2000);
 });
 
-$('#inicioLibro').click(() => {
-    $("#ingresarLibro").toggle(2000);
+$('#verFormulariolibro').click(() => {
+    $("#formularioLibro").toggle(2000);
 });
 
-$('#agregarUsuario').on('click', agregarUsuario);
+$('#crearUsuario').on('click', crearUsuario);
 
 $('#agregarLibro').on('click', agregarLibro);
 
@@ -254,10 +254,10 @@ select.addEventListener('change', seleccionarUsuario);
 
 $('#mostrarBibliotecaGral').on('click', mostrarBiblioteca);
 
-$('#confirmar').on('click', function () {
+$('#aceptar').on('click', function () {
     console.log(`El usuario con id ${quienSolicitaLibro} solicita un libro`);
     const usuario = arrayUsuarios.find(usuario => usuario.id == quienSolicitaLibro);
-    confirmarSolicitud(usuario.id);
+    intercambiarLibro(usuario.id);
 });
 
 $('#cancelar').on('click', function () {
@@ -265,7 +265,7 @@ $('#cancelar').on('click', function () {
 });
 
 // Mostrar libros para archivo json con libros precargados
-$("#inicioLibros").click(() => {
+$("#verLibrosPrecargados").click(() => {
     $("#ejemploLibros").removeClass("oculto").addClass("contenedorCards flexCentro");
     $.get("./js/libros.json", (data) => {
         let libros = data.Libros;

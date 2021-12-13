@@ -33,14 +33,24 @@ input {
 header {
     min-width: 100vw;
 }
-.container-fluid {
-    padding: 0;
-}
 
+.navbar>.container-fluid {
+    justify-content: center;
+    padding: 0;
+    width: 50%;
+}
+.btn {
+    height: 2.3rem;
+    width: 14rem;
+}
+.buscar {
+    width: 7rem;
+}
 h1,
 h5 {
     text-align: center;
-    margin: 0.2rem 0.2rem;
+    margin: 0.3rem 0.3rem;
+    margin-bottom: 0.3rem;
     margin-bottom: 0;
 }
 
@@ -70,6 +80,10 @@ p {
     flex-direction: column;
 }
 
+.display-flex {
+    display: flex;
+}
+
 .flexCentro {
     display: flex;
     justify-content: center;
@@ -87,6 +101,11 @@ p {
     margin-top: 5rem;
     height: 50%;
 }
+.baseline {
+    align-self: flex-end;
+}
+
+
 
 .card {
     min-height: 15rem;
@@ -133,11 +152,11 @@ p {
 .borde {
     border: 0.3rem solid rgb(255, 209, 6);
 }
-
-.datos {
-    display: flex;
-    flex-direction: column;
+.align-centro {
     align-items: center;
+}
+.formulario {
+    margin: 0 auto;
 }
 
 .oculto {
@@ -178,13 +197,6 @@ p {
 #ingresarLibro,
 #ingresarUsuario {
     display: none;
-    /*     width: 60vw;
-    height: 40vh;
-    margin: 0 auto;
-    background-color: rgba(0, 0, 0, 0.603);
-    position: absolute;
-    bottom: 50vh;
-    left: 40vh; */
 }
 
 .solicitarLibro {
@@ -198,4 +210,20 @@ p {
     align-self: center;
     width: 50%;
     height: 50%;
+}
+
+
+@media screen and (max-width: 767px) {
+    div {
+        display: flex;
+    }
+    .inputUsuario, .inputLibro {
+        margin: 0;
+        margin-left: 0.5rem;
+        padding: 0;
+        width: 100%;
+    }
+    div > label {
+        width: 30%;
+    }
 }
